@@ -1,4 +1,4 @@
 # nncase
 
 
-$ docker build . --tag=nncase:latest
+$ docker buildx build . --tag=nncase:latest --platform linux/amd64 -f Dockerfile.source
