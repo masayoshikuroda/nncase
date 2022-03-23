@@ -2,6 +2,7 @@ FROM ubuntu:18.04
 
 RUN apt update
 RUN apt install -y python3 python3-pip
+RUN python3 -m pip install --upgrade pip
 
 RUN apt install -y software-properties-common
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test
@@ -22,10 +23,10 @@ RUN cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE
 RUN make -j8
 RUN cmake --install . --prefix /usr/local/
 
+WORKDIR /usr/local/src/nncase
+
 RUN python3 -m pip install tensorflow==2.5.0 matplotlib pillow onnx==1.9.0 onnx-simplifier==0.3.6 onnxoptimizer==0.2.6 onnxruntime==1.8.0
 RUN python3 -m pip install torch==1.9.0+cpu torchvision==0.10.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
 RUN python3 -m pip install pytest
-
-RUN echo "export PYTHONPATH=\"/usr/local/python/python:/usr/local/src/nncase/tests:\${PYTHONPATH}\"" >> ~/.bashrc
 
 WORKDIR /root
