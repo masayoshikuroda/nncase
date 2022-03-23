@@ -1,0 +1,14 @@
+FROM registry.cn-hangzhou.aliyuncs.com/kendryte/nncase:latest
+
+RUN apt update
+RUN apt install -y curl
+
+ENV NNCASE_VERSION 1.4.0
+ENV NNCASE_BUILD 20220303
+ENV NNCASE_PACKAGE nncase-$NNCASE_VERSION.$NNCASE_BUILD-cp38-cp38-manylinux_2_24_x86_64.whl
+
+WORKDIR /root
+RUN curl -LO https://github.com/kendryte/nncase/releases/download/v$NNCASE_VERSION/$NNCASE_PACKAGE
+RUN python3 -m pip install --upgrade pip
+RUN pip3 install $NNCASE_PACKAGE
+RUN rm $NNCASE_PACKAGE
