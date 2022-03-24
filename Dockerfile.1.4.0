@@ -12,3 +12,8 @@ RUN curl -LO https://github.com/kendryte/nncase/releases/download/v$NNCASE_VERSI
 RUN python3 -m pip install --upgrade pip
 RUN pip3 install $NNCASE_PACKAGE
 RUN rm $NNCASE_PACKAGE
+
+WORKDIR /root
+COPY Compile_float32_model_for_tflite.py .
+COPY Compile_float32_model_for_onnx.py .
+COPY Compile_float32_model_for_caffe.py .
