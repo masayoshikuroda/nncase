@@ -46,9 +46,9 @@ def read_model_file(model_file):
     return model_content
 
 
-def main(model_file, target='k210'):
+def main(model, target='k210'):
     # onnx simplify
-    model_file = onnx_simplify(model_file)
+    model_file = onnx_simplify(model)
 
     # compile_options
     compile_options = nncase.CompileOptions()
